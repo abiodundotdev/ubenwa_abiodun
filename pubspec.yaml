@@ -1,0 +1,68 @@
+name: Ubenwa
+description: Ubenwa health coding challenge
+
+
+publish_to: 'none'
+version: 1.0.4+6
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  iconsax: ^0.0.8
+  
+
+dev_dependencies:
+  build_runner: ^2.1.11
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^1.0.0
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  json_serializable: ^6.2.0
+  test:
+  
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
+  image_path_ios: "assets/images/logoios.png"
+  remove_alpha_ios: true
+  adaptive_icon_background: "#ffffff00"
+  
+
+flutter:
+  uses-material-design: true
+  assets:
+   - assets/images/
+   - assets/fonts/
+   - assets/lotties/
+   - assets/jsonresponse/auth/
+   - assets/jsonresponse/account/
+   - assets/jsonresponse/payment/
+   #- .env
+
+  fonts:
+    - family: Dm Sans
+      fonts:
+        - asset: assets/fonts/DMSans/DMSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/DMSans/DMSans-italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/DMSans/DMSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/DMSans/DMSans-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/DMSans/DMSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/DMSans/DMSans-BoldItalic.ttf
+          weight: 700
+          style: italic 
+
