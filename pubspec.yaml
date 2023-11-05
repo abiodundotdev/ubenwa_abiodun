@@ -9,9 +9,11 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
+  dio: ^5.3.3
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.7.0
+  get_it: ^7.6.0
   iconsax: ^0.0.8
   
   

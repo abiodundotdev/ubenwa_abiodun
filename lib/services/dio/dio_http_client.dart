@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:simpliapp/domain/domain.dart';
+import 'package:ubenwa/domain/domain.dart';
 
 class DioHttpClient extends AppHttpClient<DioHttpResponse> {
   final Dio dio;

@@ -2,14 +2,14 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
-import 'package:simpliapp/core/core.dart';
-import 'package:simpliapp/services/services.dart';
+import 'package:ubenwa/core/core.dart';
+import 'package:ubenwa/environment.dart';
+import 'package:ubenwa/service_container.dart';
+import 'package:ubenwa/services/services.dart';
 
 class DioAdapter {
   static Future<Dio> get make async {
-    final cont = SC.get;
-    final appInfo = await cont.services.appInfo.initialize;
-    // String? fcmToken = await FirebaseMessaging.instance.getToken();
+    final sc = SC.get;
     final dio = Dio(
       BaseOptions(
         connectTimeout: AppConstants.requestDuration,
@@ -17,10 +17,6 @@ class DioAdapter {
         sendTimeout: AppConstants.requestDuration,
         baseUrl: Environment.fromConfig.httpBaseUrl,
         headers: <String, dynamic>{
-          'DeviceId': appInfo.deviceId,
-          'DeviceName': appInfo.deviceName,
-          'platform': Platform.operatingSystem,
-          'app-version': appInfo.version,
           'fcmtoken': "fcmToken",
           'idempotency-key': "${Random().nextInt(44444)}",
         },

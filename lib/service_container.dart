@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:simpliapp/core/core.dart';
 
-import 'package:simpliapp/domain/domain.dart';
-import 'package:simpliapp/services/services.dart';
+import 'package:ubenwa/domain/domain.dart';
 
 final _injector = GetIt.instance;
 
@@ -18,14 +16,14 @@ class SC {
 
   static Future<void> initialize() async {
     SC()
-      ..add<AppHttpClient>(
-        DioHttpClient(
-          await DioAdapter.make,
-        ),
-      )
-      ..add<SessionStorage>(
-        SessionStorage(),
-      );
+        // ..add<AppHttpClient>(
+        //   DioHttpClient(
+        //     await DioAdapter.make,
+        //   ),
+        // )
+        .add<SessionStorage>(
+      SessionStorage(),
+    );
   }
 
   static SC get get => _injector.get<SC>();
