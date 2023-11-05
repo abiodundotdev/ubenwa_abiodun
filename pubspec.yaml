@@ -13,8 +13,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.7.0
+  gap: ^3.0.1
   get_it: ^7.6.0
   iconsax: ^0.0.8
+  shimmer: ^3.0.0
   
   
 
@@ -67,6 +69,12 @@ flutter:
           weight: 800
         - asset: assets/fonts/Inter/Inter-Black.ttf
           weight: 900
+   
+    - family: Irish Grover
+      fonts:
+        - asset: assets/fonts/Irish_grover/IrishGrover-Regular.ttf
+          weight: 400
+       
         
         
 

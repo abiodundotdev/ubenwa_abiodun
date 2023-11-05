@@ -35,7 +35,7 @@ class AppTheme extends InheritedTheme {
           .apply(
             bodyColor: kTextLightColor,
             displayColor: kTextLightColor,
-            fontFamily: AppStrings.fontName,
+            fontFamily: AppFonts.inter,
           ),
       iconTheme: theme.iconTheme.copyWith(size: 20, color: AppColors.dark),
       listTileTheme: ListTileThemeData(
@@ -49,10 +49,6 @@ class AppTheme extends InheritedTheme {
       ),
       bottomAppBarTheme: const BottomAppBarTheme(color: AppColors.white),
       canvasColor: Colors.white,
-      // colorScheme: theme.colorScheme.copyWith(
-      //   primary: AppColors.primary,
-      //   brightness: Brightness.light,
-      // ),
       colorScheme: ColorScheme.light(primary: AppColors.primary),
       shadowColor: Colors.grey.shade400,
       buttonTheme: theme.buttonTheme.copyWith(
@@ -114,7 +110,7 @@ class AppTheme extends InheritedTheme {
       scaffoldBackgroundColor: AppColors.dark,
       primarySwatch: AppColors.primary,
       primaryColor: AppColors.primary,
-      brightness: Brightness.dark,
+      //brightness: Brightness.dark,
       primaryIconTheme: theme.primaryIconTheme.copyWith(
         color: AppColors.primary,
       ),
