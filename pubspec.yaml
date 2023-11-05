@@ -1,9 +1,9 @@
-name: Ubenwa
+name: ubenwa
 description: Ubenwa health coding challenge
 
 
 publish_to: 'none'
-version: 1.0.4+6
+version: 1.0.0
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
@@ -11,7 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_screenutil: ^5.7.0
   iconsax: ^0.0.8
+  
   
 
 dev_dependencies:
@@ -41,28 +43,28 @@ flutter:
   assets:
    - assets/images/
    - assets/fonts/
-   - assets/lotties/
-   - assets/jsonresponse/auth/
-   - assets/jsonresponse/account/
-   - assets/jsonresponse/payment/
-   #- .env
 
   fonts:
-    - family: Dm Sans
+    - family: Inter
       fonts:
-        - asset: assets/fonts/DMSans/DMSans-Regular.ttf
+        - asset: assets/fonts/Inter/Inter-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Inter/Inter-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Inter/Inter-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Inter/Inter-Regular.ttf
           weight: 400
-        - asset: assets/fonts/DMSans/DMSans-italic.ttf
-          weight: 400
-          style: italic
-        - asset: assets/fonts/DMSans/DMSans-Medium.ttf
+        - asset: assets/fonts/Inter/Inter-Medium.ttf
           weight: 500
-        - asset: assets/fonts/DMSans/DMSans-MediumItalic.ttf
-          weight: 500
-          style: italic
-        - asset: assets/fonts/DMSans/DMSans-Bold.ttf
+        - asset: assets/fonts/Inter/Inter-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter/Inter-Bold.ttf
           weight: 700
-        - asset: assets/fonts/DMSans/DMSans-BoldItalic.ttf
-          weight: 700
-          style: italic 
+        - asset: assets/fonts/Inter/Inter-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Inter/Inter-Black.ttf
+          weight: 900
+        
+        
 

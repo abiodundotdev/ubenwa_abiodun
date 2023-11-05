@@ -1,0 +1,66 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Ubenwa (Mock variant)",
+            "request": "launch",
+            "type": "dart",
+            "args":  [
+                "--flavor",
+                "mock",
+               "--dart-define=env.mode=mock"
+             ]
+        },
+        {
+            "name": "Ubenwa (Prod variant)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                 "--flavor",
+                 "prod",
+                "--dart-define=env.mode=prod"
+              ]
+        },
+        {
+            "name": "Ubenwa (Staging variant)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "--flavor",
+                "staging",
+               "--dart-define=env.mode=staging"
+             ]
+        },
+        {
+            "name": "Ubenwa (Dev variant)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "--flavor",
+                "dev",
+               "--dart-define=env.mode=dev"
+             ]
+        },
+        {
+            "name": "Ubenwa (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Ubenwa (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug"
+        },
+        {
+            "name": "Ubenwa (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
