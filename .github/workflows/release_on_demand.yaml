@@ -7,7 +7,7 @@ on:
         description: 'Brief description'
         required: true
       permalink:
-        description: 'Clubhouse Permalink'
+        description: 'Permalink'
         required: true
 
 env:
@@ -33,9 +33,9 @@ jobs:
       - run: flutter test --no-pub
       # Until steps are able to run in parallel
       - run: flutter build apk --dart-define=env.mode=prod
-    #   - run: flutter build apk --flavor staging --dart-define=env.mode=staging
-    #   - run: flutter build apk --flavor prod --dart-define=env.mode=prod
-    #   - run: flutter build apk --flavor mock --dart-define=env.mode=mock
+      - run: flutter build apk --flavor staging --dart-define=env.mode=staging
+      - run: flutter build apk --flavor prod --dart-define=env.mode=prod
+      - run: flutter build apk --flavor mock --dart-define=env.mode=mock
       - name: Copying to Artifacts repository
         id: copy
         run: |
@@ -99,11 +99,11 @@ jobs:
       - name: Send Mail Attachments
         uses: dawidd6/action-send-mail@v2
         with:
-          server_address: premium73.web-hosting.com
+          server_address: smtp.gmail.com
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: Borome Mobile Pre-Release Build Successful
+          subject: Ubenwa Mobile Pre-Release Build Successful
           to: ${{ steps.get_emails.outputs.emails }}
           from: Borome R&D <${{secrets.MAIL_USERNAME}}>
           content_type: text/html
