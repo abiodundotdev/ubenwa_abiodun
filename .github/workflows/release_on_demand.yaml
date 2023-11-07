@@ -29,10 +29,10 @@ jobs:
       - run: flutter pub get
       - run: flutter test
       # Until steps are able to run in parallel
-      - run: flutter build apk --dart-define=env.mode=prod
-      - run: flutter build apk --flavor staging --dart-define=env.mode=staging
-      - run: flutter build apk --flavor prod --dart-define=env.mode=prod
-      - run: flutter build apk --flavor mock --dart-define=env.mode=mock
+      - run: flutter build apk --flavor dev --dart-define=env.mode=prod --no-tree-shake-icons
+      - run: flutter build apk --flavor staging --dart-define=env.mode=staging --no-tree-shake-icons
+      - run: flutter build apk --flavor prod --dart-define=env.mode=prod --no-tree-shake-icons
+      - run: flutter build apk --flavor mock --dart-define=env.mode=mock --no-tree-shake-icons
       - name: Copying to Artifacts repository
         id: copy
         run: |

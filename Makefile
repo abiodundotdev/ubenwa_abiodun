@@ -52,10 +52,10 @@ install_ios_staging:
 
 # Android
 mock_android:
-	flutter build apk --flavor mock --dart-define=env.mode=mock
+	flutter build apk --flavor mock --dart-define=env.mode=mock --no-tree-shake-icons
 
 prod_android:
-	flutter build apk --flavor prod --dart-define=env.mode=prod
+	flutter build apk --flavor prod --dart-define=env.mode=prod --no-tree-shake-icons
 
 prod_android_appbundle:
 	flutter build appbundle --flavor prod --dart-define=env.mode=prod --no-tree-shake-icons
