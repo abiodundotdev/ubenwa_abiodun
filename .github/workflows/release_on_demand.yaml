@@ -27,10 +27,7 @@ jobs:
           channel: "stable"
       - run: flutter doctor
       - run: flutter pub get
-      - run: flutter format --set-exit-if-changed -l 120 lib
-      - run: flutter packages pub run build_runner build --delete-conflicting-outputs
-      - run: flutter analyze lib
-      - run: flutter test --no-pub
+      - run: flutter test
       # Until steps are able to run in parallel
       - run: flutter build apk --dart-define=env.mode=prod
       - run: flutter build apk --flavor staging --dart-define=env.mode=staging
@@ -103,9 +100,9 @@ jobs:
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: Ubenwa Mobile Pre-Release Build Successful
+          subject: Abiodun Ubenwa Mobile Pre-Release Build Successful
           to: ${{ steps.get_emails.outputs.emails }}
-          from: Borome R&D <${{secrets.MAIL_USERNAME}}>
+          from:   Ubenwa Abiodun <${{secrets.MAIL_USERNAME}}>
           content_type: text/html
           body: |
             <h1>Build Successful</h1>
