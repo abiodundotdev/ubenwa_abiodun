@@ -16,6 +16,8 @@ dependencies:
   gap: ^3.0.1
   get_it: ^7.6.0
   iconsax: ^0.0.8
+  intl: ^0.18.1
+  quiver: ^3.2.1
   shimmer: ^3.0.0
   
   

@@ -52,13 +52,13 @@ class AppTheme extends InheritedTheme {
       colorScheme: ColorScheme.light(primary: AppColors.primary),
       shadowColor: Colors.grey.shade400,
       buttonTheme: theme.buttonTheme.copyWith(
-        height: 66.0,
+        height: 50.0,
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primary,
         ),
-        shape: const RoundedRectangleBorder(),
         highlightColor: Colors.white10,
         splashColor: Colors.white10,
+        shape: const RoundedRectangleBorder(),
         textTheme: ButtonTextTheme.primary,
       ),
       dividerTheme: DividerThemeData(
@@ -144,13 +144,13 @@ class AppTheme extends InheritedTheme {
       ),
       shadowColor: Colors.grey.shade400,
       buttonTheme: theme.buttonTheme.copyWith(
-        height: 66.0,
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: AppColors.primary,
+        height: 50.0,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
         ),
-        shape: const RoundedRectangleBorder(),
         highlightColor: Colors.white10,
         splashColor: Colors.white10,
+        shape: const RoundedRectangleBorder(),
         textTheme: ButtonTextTheme.primary,
       ),
       bottomAppBarTheme: BottomAppBarTheme(color: AppColors.dark),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
   static const Color _basePrimary = Color(0XFF4476F6);
-  static const Color _baseRed = Color(0XFFB91C1C);
   static const Color _baseSecondary = Color(0XFF282828);
   static const Color _baseYellow = Color(0xFFFF991f);
   static const Color _basePurple = Color(0xFF5243AA);
@@ -123,9 +122,9 @@ class AppColors {
     },
   );
 
-  static MaterialColor accent = MaterialColor(
-    _baseRed.value,
-    const <int, Color>{
+  static MaterialColor accent = const MaterialColor(
+    0XFFFFB300,
+    <int, Color>{
       50: Color(0XFFFCF3DD),
       100: Color(0XFFFCF3DD),
       200: Color(0XFFFEE6AF),

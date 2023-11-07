@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ubenwa/core/core.dart';
-import 'package:ubenwa/presentation/presentation.dart';
+import 'package:ubenwa/presentation/dashboard/cry_record_page.dart';
 
 void main() {
   runApp(const App());
@@ -21,7 +21,8 @@ class App extends StatelessWidget {
               title: 'Flutter Demo',
               theme: AppTheme.of(context).light(Theme.of(context)),
               darkTheme: AppTheme.of(context).dark(Theme.of(context)),
-              home: const SplashScreen(),
+              themeMode: ThemeMode.light,
+              home: const CryRecordPage(),
             );
           }),
     );
