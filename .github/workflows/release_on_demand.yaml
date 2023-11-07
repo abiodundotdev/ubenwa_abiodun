@@ -48,8 +48,8 @@ jobs:
           version="branches/$branch_name"
           echo "Found tag for $version"
 
-          email=${{ secrets.MAIL_USERNAME }}
-          token=${{ secrets.API_TOKEN_GITHUB }}
+          email=${{secrets.EMAIL_USERNAME }}
+          token=${{secrets.API_TOKEN_GITHUB }}
 
           clone_dir=$(mktemp -d)
 
