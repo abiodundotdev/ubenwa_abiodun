@@ -56,7 +56,7 @@ prod_android:
 	flutter build apk --flavor prod --dart-define=env.mode=prod
 
 prod_android_appbundle:
-	flutter build ipa --flavor prod --dart-define=env.mode=prod --no-tree-shake-icons
+	flutter build appbundle --flavor prod --dart-define=env.mode=prod --no-tree-shake-icons
 
 staging_android:
 	flutter build apk --flavor staging --dart-define=env.mode=staging

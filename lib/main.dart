@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:ubenwa/core/core.dart';
 import 'package:ubenwa/environment.dart';
 import 'package:ubenwa/presentation/presentation.dart';
@@ -7,9 +8,14 @@ import 'package:ubenwa/service_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await Alarm.init();
   await SC.initialize();
-  runApp(const App());
+  await SentryFlutter.init(
+    (options) {
+      options.dsn = AppStrings.sentryKey;
+      options.tracesSampleRate = 1.0;
+    },
+    appRunner: () => runApp(const App()),
+  );
 }
 
 class App extends StatelessWidget {
