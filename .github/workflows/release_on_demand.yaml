@@ -41,7 +41,7 @@ jobs:
           file_filter=(build/app/outputs/flutter-apk/*-release.apk)
 
           username=${{ github.repository_owner }}
-          repo=mobile-prereleases
+          repo=ubenwa_abiodun
           destination_branch=main
 
           branch_name=$(basename "${{ github.ref }}")
@@ -106,7 +106,7 @@ jobs:
           content_type: text/html
           body: |
             <h1>Build Successful</h1>
-            <p>Successfully generated builds for <a href="${{ steps.copy.outputs.branch_url }}">Borome mobile apps</a>.</p>
+            <p>Successfully generated builds for <a href="${{ steps.copy.outputs.branch_url }}">Ubenwa mobile apps</a>.</p>
             <p>Attached to this mail are links to four separate pre-release android builds for:</p>
             <ol>
                 <li><a href="${{ steps.copy.outputs.url }}/app-mock-release.apk">Mock (UI/UX)</a></li>
