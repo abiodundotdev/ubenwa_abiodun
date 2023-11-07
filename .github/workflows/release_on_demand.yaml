@@ -116,4 +116,5 @@ jobs:
             </ol>
             <p>You can pick any of the above. The intention is to try and break either one or all of the apps.</p>
             <p>More technical information on what changed can be found in this <a href="${{ steps.copy.outputs.readme_url }}/">READ ME</a></p>
-            <p>Good Luck!</p>
+            <p>Note that this is an automated email from the action you run.</p>
+            <p>Thank you</p>

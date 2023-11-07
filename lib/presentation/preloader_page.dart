@@ -46,7 +46,7 @@ class _PreloaderPageState extends State<PreloaderPage>
 
   //TODO: This should animate after network call his completed, this should not be done live applications
   void _animateToPageAfterCompletion() async {
-    await Future.delayed(const Duration(seconds: 6));
+    await Future.delayed(const Duration(seconds: 8));
     SC.get.navigator.auth.pop();
   }
 
@@ -104,8 +104,8 @@ class _PreloaderPageState extends State<PreloaderPage>
                 return Align(
                   alignment: Alignment(0, waterDroplet.value.toDouble()),
                   child: CustomPaint(
-                    size: Size(15.0 + (10 * waterDroplet.value),
-                        40.0 + (5 * waterDroplet.value)),
+                    size: Size(10.0 + (10 * waterDroplet.value),
+                        30.0 + (5 * waterDroplet.value)),
                     painter: WaterDropletPainter(),
                   ),
                 );

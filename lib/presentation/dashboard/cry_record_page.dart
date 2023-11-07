@@ -50,6 +50,7 @@ class _CryRecordPageState extends State<CryRecordPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              Gap(10.0.h),
               Padding(
                 padding: AppConstants.contentPadding,
                 child: _HorizontalCalender(
@@ -71,7 +72,9 @@ class _CryRecordPageState extends State<CryRecordPage> {
               Gap(23.0.h),
               Padding(
                 padding: AppConstants.contentPadding.w,
-                child: const _ChallengeCard(),
+                child: _ChallengeCard(
+                  pieChartpercentage: chartValue / 8,
+                ),
               ),
               //Extra bottom pading for widget to be more visible
               Gap(20.0.h),
@@ -127,7 +130,7 @@ class _HorizontalCalenderState extends State<_HorizontalCalender> {
       (timeStamp) {
         if (monthScrollController.hasClients &&
             daysScrollController.hasClients) {
-          //TODO: Add if condition to checl if it still visible or not
+          //TODO: Add if condition to check if it still visible or not
           monthScrollController.animateTo(_selectedMonth * dateWidth + 40.w,
               duration: scrollAnimationDuration, curve: Curves.easeIn);
           daysScrollController.animateTo(_selectedDay * dateWidth + 40.w,
@@ -470,7 +473,9 @@ class _GridData {
 }
 
 class _ChallengeCard extends StatelessWidget {
-  const _ChallengeCard();
+  ///This is added as a fake data to auto animate the pieChart. Its just a fake data
+  final double pieChartpercentage;
+  const _ChallengeCard({required this.pieChartpercentage});
 
   @override
   Widget build(BuildContext context) {
@@ -529,8 +534,11 @@ class _ChallengeCard extends StatelessWidget {
                     flex: 8,
                     child: LayoutBuilder(
                       builder: (context, c) {
-                        return AnimatedValue(
-                          builder: (context, value) {
+                        return TweenAnimationBuilder<double>(
+                          duration: const Duration(seconds: 1),
+                          tween:
+                              Tween<double>(begin: 0, end: pieChartpercentage),
+                          builder: (context, double value, _) {
                             return CustomPaint(
                               size: Size.square(c.maxHeight),
                               painter: CirclularBarPainter(
@@ -632,7 +640,6 @@ class CirclularBarPainter extends CustomPainter {
         Color(0xFFDEA00F),
       ],
     ).createShader(rect);
-
     //Background complete arc
     canvas.drawArc(
       Rect.fromCenter(center: center, width: width, height: height),
@@ -641,7 +648,6 @@ class CirclularBarPainter extends CustomPainter {
       false,
       backGroundpaint,
     );
-
     //Progress indicator arc
     canvas.drawArc(
       rect,
