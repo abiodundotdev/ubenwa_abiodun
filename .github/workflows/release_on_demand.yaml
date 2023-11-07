@@ -98,11 +98,11 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
+          username: ${{secrets.EMAIL_USERNAME}}
+          password: ${{secrets.EMAIL_PASSWORD}}
           subject: Abiodun Ubenwa Mobile Pre-Release Build Successful
           to: ${{ steps.get_emails.outputs.emails }}
-          from:   Ubenwa Abiodun <${{secrets.MAIL_USERNAME}}>
+          from:   Ubenwa Abiodun <${{secrets.EMAIL_USERNAME}}>
           content_type: text/html
           body: |
             <h1>Build Successful</h1>
