@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ubenwa/presentation/presentation.dart';
 
 import 'base_navigator.dart';
 
@@ -13,6 +14,12 @@ class AuthNavigator extends BaseNavigator {
   void toSignUp() {
     push(
       const Text(""),
+    );
+  }
+
+  void toOnboarding() {
+    push(
+      const OnboardingPage(),
     );
   }
 }

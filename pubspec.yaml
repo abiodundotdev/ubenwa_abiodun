@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
+  alarm: ^1.2.2
   dio: ^5.3.3
   flutter:
     sdk: flutter
@@ -38,10 +39,8 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo.png"
-  image_path_ios: "assets/images/logoios.png"
-  remove_alpha_ios: true
-  adaptive_icon_background: "#ffffff00"
+  image_path: "assets/images/wifi.png"
+  adaptive_icon_background: "#4476F6"
   
 
 flutter:

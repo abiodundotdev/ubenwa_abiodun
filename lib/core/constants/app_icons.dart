@@ -8,5 +8,5 @@ class AppIcons {
   static IconData sunFog = Iconsax.sun_fog;
   static IconData star = Iconsax.star_1;
   static IconData wifi = Iconsax.wifi_square;
-  static IconData chart = Iconsax.chart;
+  static IconData chart = Iconsax.chart_3;
 }

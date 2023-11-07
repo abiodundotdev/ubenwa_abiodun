@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -21,31 +19,24 @@ class _PreloaderPageState extends State<PreloaderPage>
   late AnimationController waterDropController;
   late Animation<num> waterDroplet;
 
+  int dropCount = 0;
+
   @override
   void initState() {
     super.initState();
     waterDropController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
     )..repeat();
 
     waterDroplet = Tween<num>(begin: -1, end: 1).animate(waterDropController)
-      ..addStatusListener(
-        (status) {
-          if (status.isCompleted) {
-            print(status);
-            print("object");
+      ..addListener(
+        () {
+          if (waterDroplet.value == 0.9) {
             dropCount++;
           }
         },
       );
-
-    Timer.periodic(const Duration(seconds: 3), (timer) {
-      setState(() {
-        print(dropCount);
-        dropCount++;
-      });
-    });
   }
 
   @override
@@ -53,8 +44,6 @@ class _PreloaderPageState extends State<PreloaderPage>
     super.dispose();
     waterDropController.dispose();
   }
-
-  int dropCount = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +53,9 @@ class _PreloaderPageState extends State<PreloaderPage>
       Colors.white,
     ];
     const _durations = [
-      5000,
-      6000,
-      7000,
+      10000,
+      9000,
+      8000,
     ];
     const _heightPercentages = [
       0.65,
@@ -110,7 +99,8 @@ class _PreloaderPageState extends State<PreloaderPage>
                 return Align(
                   alignment: Alignment(0, waterDroplet.value.toDouble()),
                   child: CustomPaint(
-                    size: const Size(30, 25),
+                    size: Size(15.0 + (10 * waterDroplet.value),
+                        40.0 + (5 * waterDroplet.value)),
                     painter: WaterDropletPainter(),
                   ),
                 );
@@ -123,7 +113,7 @@ class _PreloaderPageState extends State<PreloaderPage>
                   builder: (context, _) {
                     return WaterWave(
                       config: waveConfig,
-                      size: const Size.fromHeight(200),
+                      size: Size.fromHeight(80.h + (dropCount * 10)),
                     );
                   }),
             )
@@ -134,7 +124,6 @@ class _PreloaderPageState extends State<PreloaderPage>
   }
 }
 
-//+ (dropCount.toDouble() * 20)
 class WaterDropletPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -145,11 +134,11 @@ class WaterDropletPainter extends CustomPainter {
     Path path = Path();
     final width = size.width;
     final height = size.height;
+    const controlPoint = .4;
     path.moveTo(width / 2, 0);
-    path.quadraticBezierTo(
-        size.width, size.height / 2, size.width / 2, size.height);
-    path.quadraticBezierTo(0, size.height / 2, size.width / 2, 0);
-
+    path.lineTo(0, height * controlPoint);
+    path.quadraticBezierTo(width / 2, height, width, height * controlPoint);
+    path.lineTo(width / 2, 0);
     canvas.drawPath(path, paint);
   }
 

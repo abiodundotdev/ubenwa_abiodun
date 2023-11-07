@@ -5,7 +5,7 @@ abstract class BaseNavigator {
   final GlobalKey<NavigatorState> navigatorkey;
   BaseNavigator(this.navigatorkey);
 
-  Future push(Widget widget) async {
+  Future push(Widget widget, {String? name}) async {
     return navigatorkey.currentState?.push(
       RouteTransition.slideIn(widget),
     );

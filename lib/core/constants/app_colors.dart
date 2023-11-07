@@ -9,6 +9,7 @@ class AppColors {
   static const Color _baseGreen = Color(0xFF064E3B);
   static const Color _baseDark = Color(0xFF151411);
   static const Color _baseGrey = Color(0xFFBCBBC1);
+  static const Color _baseRed = Color(0XFFB91C1C);
 
   static MaterialColor green = MaterialColor(
     _baseGreen.value,
@@ -23,6 +24,22 @@ class AppColors {
       700: _baseGreen.withOpacity(.8),
       800: _baseGreen.withOpacity(.9),
       900: _baseGreen.withOpacity(1),
+    },
+  );
+
+  static MaterialColor red = MaterialColor(
+    _baseRed.value,
+    <int, Color>{
+      50: _baseRed.withOpacity(.1),
+      100: _baseRed.withOpacity(.2),
+      200: _baseRed.withOpacity(.3),
+      300: _baseRed.withOpacity(.4),
+      400: _baseRed.withOpacity(.5),
+      500: _baseRed.withOpacity(.1),
+      600: _baseRed.withOpacity(.7),
+      700: _baseRed.withOpacity(.8),
+      800: _baseRed.withOpacity(.9),
+      900: _baseRed.withOpacity(1),
     },
   );
 

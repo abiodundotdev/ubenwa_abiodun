@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ubenwa/core/core.dart';
-import 'package:ubenwa/presentation/dashboard/cry_record_page.dart';
+import 'package:ubenwa/environment.dart';
+import 'package:ubenwa/presentation/presentation.dart';
+import 'package:ubenwa/service_container.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //await Alarm.init();
+  await SC.initialize();
   runApp(const App());
 }
 
@@ -12,19 +17,33 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppTheme(
+    final environment = Environment.fromConfig;
+    final app = AppTheme(
       child: ScreenUtilInit(
           designSize: const Size(360, 690),
           minTextAdapt: true,
           builder: (context, child) {
             return MaterialApp(
-              title: 'Flutter Demo',
+              navigatorKey: rootNavigatorKey,
+              debugShowCheckedModeBanner: false,
               theme: AppTheme.of(context).light(Theme.of(context)),
               darkTheme: AppTheme.of(context).dark(Theme.of(context)),
               themeMode: ThemeMode.light,
-              home: const CryRecordPage(),
+              home: const SplashScreen(),
             );
           }),
+    );
+    if (environment.isProd) {
+      return app;
+    }
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Banner(
+        color: AppColors.primary,
+        message: environment.name.toUpperCase(),
+        location: BannerLocation.topStart,
+        child: app,
+      ),
     );
   }
 }

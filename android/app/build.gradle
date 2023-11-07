@@ -43,21 +43,43 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.ubenwa_coding_challenge"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        applicationId "com.ubenwa.codingchallenge"
+        minSdkVersion 19
+        targetSdkVersion 33
+        compileSdkVersion 33
         versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+        }
+    }
+
+
+   flavorDimensions "environment"
+
+    productFlavors {
+        prod {
+            dimension "environment"
+            versionName flutterVersionName
+            resValue "string", "app_label", "Ubenwa"
+        }
+        mock {
+            dimension "environment"
+            versionName flutterVersionName+"-mock"
+            resValue "string", "app_label", "Ubenwa Mock"
+        }
+        staging {
+            dimension "environment"
+            versionName flutterVersionName+"-staging"
+            resValue "string", "app_label", "Ubenwa Staging"
+        }
+        dev {
+            dimension "environment"
+            versionName flutterVersionName+"-dev"
+            resValue "string", "app_label", "Ubenwa Dev"
         }
     }
 }

@@ -5,9 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:ubenwa/core/core.dart';
-import 'package:ubenwa/core/extensions/flexible_extension.dart';
 //import 'dart:math' as math;
 import 'package:ubenwa/presentation/widget/app_scaffold.dart';
+import 'package:ubenwa/service_container.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,6 +18,19 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Duration duration = const Duration(milliseconds: 300);
+
+  @override
+  void initState() {
+    super.initState();
+    _animateToPageAfterCompletion();
+  }
+
+  //TODO: This should animate after network call his completed, this should not be done live applications
+  void _animateToPageAfterCompletion() async {
+    await Future.delayed(const Duration(seconds: 6));
+    SC.get.navigator.auth.toOnboarding();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(

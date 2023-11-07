@@ -23,7 +23,9 @@ class _CryRecordPageState extends State<CryRecordPage> {
   Widget build(BuildContext context) {
     return AppScaffold(
         padding: EdgeInsets.zero,
-        appBar: CustomAppBar(),
+        appBar: CustomAppBar(
+          title: "Cry Records",
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -41,16 +43,18 @@ class _CryRecordPageState extends State<CryRecordPage> {
               ),
               Gap(23.0.h),
               Padding(
-                padding: AppConstants.contentPadding,
+                padding: AppConstants.contentPadding.w,
                 child: _OverviewCard(),
               ),
-              Gap(10.0.h),
+              Gap(23.0.h),
               _HourlyBreakDownCard(percentage: chartValue),
-              Gap(10.0.h),
+              Gap(23.0.h),
               Padding(
-                padding: AppConstants.contentPadding,
+                padding: AppConstants.contentPadding.w,
                 child: const _ChallengeCard(),
-              )
+              ),
+              //Extra bottom pading for widget to be more visible
+              Gap(20.0.h),
             ],
           ),
         ));
@@ -95,16 +99,17 @@ class _HorizontalCalenderState extends State<_HorizontalCalender> {
     monthScrollController = ScrollController();
     daysScrollController = ScrollController();
 
-//To automatically scroll to the current datae if data is not visible
+//To automatically scroll to the current date if date is not visible
 //TODO: Optimize to make it better base on the date
 //Added extra spacing (40) for spacing for great accecibility
+
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         if (monthScrollController.hasClients &&
             daysScrollController.hasClients) {
+          //TODO: Add if condition to checl if it still visible or not
           monthScrollController.animateTo(_selectedMonth * dateWidth + 40.w,
               duration: scrollAnimationDuration, curve: Curves.easeIn);
-
           daysScrollController.animateTo(_selectedDay * dateWidth + 40.w,
               duration: scrollAnimationDuration, curve: Curves.easeIn);
         }
@@ -137,8 +142,10 @@ class _HorizontalCalenderState extends State<_HorizontalCalender> {
                       duration: scrollAnimationDuration,
                       curve: Curves.easeIn,
                     );
-                    widget.onDateChange(DateTime(
-                        DateTime.now().year, _selectedMonth, _selectedDay));
+                    widget.onDateChange(
+                      DateTime(
+                          DateTime.now().year, _selectedMonth, _selectedDay),
+                    );
                   },
                   child: Text(
                     months[_index].substring(0, 3),
@@ -265,21 +272,6 @@ class _HorizontalCalenderState extends State<_HorizontalCalender> {
   }
 }
 
-class _GridData {
-  final String title;
-  final IconData icon;
-  final Color color;
-  final String content;
-  final String bottom;
-  _GridData({
-    required this.bottom,
-    required this.color,
-    required this.content,
-    required this.icon,
-    required this.title,
-  });
-}
-
 class _HourlyBreakDownCard extends StatelessWidget {
   final num percentage;
   const _HourlyBreakDownCard({required this.percentage});
@@ -287,9 +279,9 @@ class _HourlyBreakDownCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TitledCard(
-      title: "Hourly breakdown",
+      title: "    Hourly breakdown",
       content: Container(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.symmetric(vertical: 14.0.h, horizontal: 18.0.w),
         height: 160.0.h,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -323,24 +315,27 @@ class _OverviewCard extends StatelessWidget {
   final gridDataList = [
     _GridData(
       bottom: "20% less than yesterday",
-      color: AppColors.primary,
+      color: const Color(0XFF0D2D80),
       content: "45",
       icon: AppIcons.sunFog,
       title: "Number of cry episodes",
+      hasWarning: false,
     ),
     _GridData(
       bottom: "20% worse than yesterday",
-      color: AppColors.secondary,
+      color: const Color(0XFF896511),
       content: "30 mins",
       icon: AppIcons.wifi,
       title: "Longest cry duration",
+      hasWarning: true,
     ),
     _GridData(
       bottom: "20% better than yesterday",
-      color: AppColors.accent,
-      content: "45",
+      color: const Color(0XFFAC228E),
+      content: "4 hours",
       icon: AppIcons.chart,
-      title: "Number of cry episodes",
+      title: "Cummulative cry duration",
+      hasWarning: false,
     )
   ];
 
@@ -352,16 +347,16 @@ class _OverviewCard extends StatelessWidget {
       content: GridView.count(
         crossAxisCount: 3,
         shrinkWrap: true,
-        crossAxisSpacing: 16.0,
+        crossAxisSpacing: 12.0.w,
         mainAxisSpacing: 16.0,
-        childAspectRatio: 1 / 1.2,
+        childAspectRatio: 1 / 1.1,
         physics: const NeverScrollableScrollPhysics(),
         children: List.generate(
           gridDataList.length,
           (index) {
             final gridData = gridDataList[index];
             return Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(10),
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
@@ -372,24 +367,24 @@ class _OverviewCard extends StatelessWidget {
                 ),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
+                    flex: 3,
                     child: Row(
                       children: [
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.all(10.0),
-                            decoration: ShapeDecoration(
-                              color: gridData.color.withOpacity(.2),
-                              shape: const CircleBorder(),
-                            ),
-                            child: Icon(
-                              gridData.icon,
-                              color: gridData.color,
-                            ),
+                        Container(
+                          padding: EdgeInsets.all(6.0.w),
+                          decoration: ShapeDecoration(
+                            color: gridData.color.withOpacity(.2),
+                            shape: const CircleBorder(),
+                          ),
+                          child: Icon(
+                            gridData.icon,
+                            size: 15.0.w,
+                            color: gridData.color,
                           ),
                         ),
+                        const Gap(10.0),
                         Expanded(
                           child: Text(
                             gridData.title,
@@ -399,18 +394,33 @@ class _OverviewCard extends StatelessWidget {
                       ],
                     ),
                   ),
+                  // Gap(5.0.h),
                   const Spacer(),
-                  Text(
-                    gridData.content,
-                    style: textTheme.titleLarge!.copyWith(
-                      fontWeight: FontWeight.w800,
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      gridData.content,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: textTheme.titleLarge!.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
+                  //Gap(5.0.h),
                   const Spacer(),
-                  Text(
-                    gridData.bottom,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 8.0),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      gridData.bottom,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 8.0.sp,
+                        color: gridData.hasWarning
+                            ? AppColors.red
+                            : AppColors.green,
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -422,39 +432,55 @@ class _OverviewCard extends StatelessWidget {
   }
 }
 
+class _GridData {
+  final String title;
+  final IconData icon;
+  final Color color;
+  final String content;
+  final String bottom;
+  final bool hasWarning;
+  _GridData({
+    required this.bottom,
+    required this.color,
+    required this.content,
+    required this.icon,
+    required this.title,
+    required this.hasWarning,
+  });
+}
+
 class _ChallengeCard extends StatelessWidget {
   const _ChallengeCard();
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            height: 180.0.h,
-            padding: const EdgeInsets.all(20.0),
-            decoration: ShapeDecoration(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                side: const BorderSide(
-                  width: .5,
-                  color: Color(0xffb7b7b7a),
+    return SizedBox(
+      height: 160.0.h,
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(20.0),
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  side: const BorderSide(
+                    width: .5,
+                    color: Color(0xffb7b7b7a),
+                  ),
                 ),
               ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
                           padding: EdgeInsets.all(7.0.w),
                           decoration: ShapeDecoration(
                             color: AppColors.accent.shade200,
@@ -462,86 +488,90 @@ class _ChallengeCard extends StatelessWidget {
                           ),
                           child: Icon(
                             AppIcons.star,
+                            size: 15.0.w,
                             color: AppColors.accent.shade900,
                           ),
                         ),
-                      ),
-                      const Gap(8.0),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
+                        const Gap(8.0),
+                        Text(
                           "Daily challenge",
+                          textAlign: TextAlign.center,
                           style: textTheme.bodySmall!.copyWith(
                             fontSize: 11.0.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const Gap(15.0),
-                Expanded(
-                  flex: 8,
-                  child: LayoutBuilder(
-                    builder: (context, c) {
-                      return AnimatedValue(
-                        builder: (context, value) {
-                          return CustomPaint(
-                            size: Size.square(c.maxHeight),
-                            painter: CirclularBarPainter(
-                              title: "8",
-                              content: "out of 12\n hours of silence",
-                              percentage: .8 * value,
-                            ),
-                          );
-                        },
-                      );
-                    },
+                  const Spacer(),
+                  Expanded(
+                    flex: 8,
+                    child: LayoutBuilder(
+                      builder: (context, c) {
+                        return AnimatedValue(
+                          builder: (context, value) {
+                            return CustomPaint(
+                              size: Size.square(c.maxHeight),
+                              painter: CirclularBarPainter(
+                                title: "8",
+                                content: "out of 12\n hours of silence",
+                                percentage: .8 * value,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const Gap(20.0),
-        Expanded(
-          child: Container(
-            height: 180.0.h,
-            padding: const EdgeInsets.all(8),
-            decoration: ShapeDecoration(
-              color: AppColors.primary.shade400,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
+                ],
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Image(image: AppImages.feedingBaby2),
-                Text(
-                  "Next cry predicted",
-                  style: textTheme.bodyMedium!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+          ),
+          Gap(15.0.w),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: ShapeDecoration(
+                color: AppColors.primary.shade400,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image(image: AppImages.feedingBaby2),
+                  Gap(5.0.h),
+                  Text(
+                    "Next predicted cry",
+                    style: textTheme.bodyMedium!.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                Text(
-                  "12:40 - 14:30",
-                  style: textTheme.headlineSmall!.copyWith(
-                    color: const Color(0xFFffba18),
-                    fontWeight: FontWeight.w600,
+                  Gap(5.0.h),
+                  Expanded(
+                    child: Text(
+                      "12:40 - 14:30",
+                      style: textTheme.headlineSmall!.copyWith(
+                        color: const Color(0xFFffba18),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text("Set alarm"),
-                ),
-              ],
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Set alarm"),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -558,7 +588,7 @@ class CirclularBarPainter extends CustomPainter {
     final width = size.width;
     final height = size.height;
     final center = Offset(width / 2, height / 2);
-    const thickness = 25.0;
+    final thickness = 20.0.w;
     final rect = Rect.fromCenter(center: center, width: width, height: height);
 
     final paint = Paint()

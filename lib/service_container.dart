@@ -1,11 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-
+import 'package:ubenwa/core/core.dart';
 import 'package:ubenwa/domain/domain.dart';
+import 'package:ubenwa/services/services.dart';
 
 final _injector = GetIt.instance;
 
-/// Service container for registering and and getting services
+/// Service container for registering and getting services
 class SC {
   SC() {
     _injector.allowReassignment = true;
@@ -16,14 +18,13 @@ class SC {
 
   static Future<void> initialize() async {
     SC()
-        // ..add<AppHttpClient>(
-        //   DioHttpClient(
-        //     await DioAdapter.make,
-        //   ),
-        // )
-        .add<SessionStorage>(
-      SessionStorage(),
-    );
+      ..add<SessionStorage>(
+        SessionStorage(),
+      )
+      ..add<AppHttpClient>(
+        DioHttpClient(Dio()),
+      )
+      ..add<AppNavigator>(AppNavigator(rootNavigatorKey));
   }
 
   static SC get get => _injector.get<SC>();
@@ -57,10 +58,8 @@ class SC {
 
 extension XSC on SC {
   SessionStorage get sessionStorage => _injector.get<SessionStorage>();
-  // SharedPrefs get sharedPrefs => _injector.get<SharedPrefs>();
-  // AppHttpClient get httpClient => _injector.get<AppHttpClient>();
-  // AppServices get services => _injector.get<AppServices>();
-  // AppNavigator get navigator => _injector.get<AppNavigator>();
+  AppHttpClient get httpClient => _injector.get<AppHttpClient>();
+  AppNavigator get navigator => _injector.get<AppNavigator>();
 }
 
 class SessionStorage {
@@ -68,9 +67,7 @@ class SessionStorage {
   final _token = ValueNotifier<String?>(null);
   ValueNotifier<String?> get token => _token;
   ValueNotifier<dynamic> get user => _user;
-
   ValueNotifier<ThemeMode> appThemeMode = ValueNotifier(ThemeMode.system);
-
   void setToken(String? token) {
     _token.value = token;
   }
@@ -84,45 +81,4 @@ enum ServiceScope {
 
   bool get isFactory => this == ServiceScope.factory;
   bool get isSingleton => this == ServiceScope.singleton;
-}
-
-class UnauthrizedException extends AppException {
-  UnauthrizedException({super.message, super.response});
-}
-
-class NotInternetException extends AppException {
-  NotInternetException({super.message, super.response});
-}
-
-class NotFoundException extends AppException {
-  NotFoundException({super.message, super.response});
-}
-
-class RedirectException extends AppException {
-  RedirectException({super.message, super.response});
-}
-
-class ForbiddenException extends AppException {
-  ForbiddenException({super.message, super.response});
-}
-
-class TimeOutException extends AppException {
-  TimeOutException({super.message, super.response});
-}
-
-class BadRequestException extends AppException {
-  BadRequestException({super.message, super.response});
-}
-
-class DeviceException extends AppException {
-  DeviceException({super.message, super.response});
-}
-
-class AppException implements Exception {
-  final AppHttpResponse? response;
-  final String? message;
-  AppException({
-    this.response,
-    this.message,
-  });
 }
