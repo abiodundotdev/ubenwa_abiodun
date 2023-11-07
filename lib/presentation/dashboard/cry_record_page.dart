@@ -26,6 +26,26 @@ class _CryRecordPageState extends State<CryRecordPage> {
         padding: EdgeInsets.zero,
         appBar: CustomAppBar(
           title: "Cry Records",
+          trailing: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              child: Stack(
+                children: [
+                  Icon(
+                    AppIcons.notification,
+                    color: Colors.black,
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.accent,
+                      radius: 6.0,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -37,7 +57,6 @@ class _CryRecordPageState extends State<CryRecordPage> {
                     //TODO: This is used to animate the bar chart to show the animation efffect based on data passed
                     setState(() {
                       chartValue = Random().nextInt(8 - 1 + 1) + 1;
-                      print(date);
                     });
                   },
                 ),

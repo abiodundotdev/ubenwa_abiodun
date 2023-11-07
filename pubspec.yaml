@@ -9,7 +9,7 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
-  alarm: ^1.2.2
+  #alarm: ^1.2.2
   dio: ^5.3.3
   flutter:
     sdk: flutter
