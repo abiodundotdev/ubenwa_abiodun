@@ -39,8 +39,9 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/wifi.png"
+  image_path: "assets/images/icon2.png"
   adaptive_icon_background: "#4476F6"
+  remove_alpha_ios : true
   
 
 flutter:

@@ -7,7 +7,8 @@ import 'package:intl/intl.dart' as intl;
 import 'package:quiver/time.dart';
 
 import 'package:ubenwa/core/core.dart';
-import 'package:ubenwa/presentation/widget/widget.dart';
+import 'package:ubenwa/presentation/presentation.dart';
+import 'package:ubenwa/service_container.dart';
 
 class CryRecordPage extends StatefulWidget {
   const CryRecordPage({super.key});
@@ -562,7 +563,9 @@ class _ChallengeCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        SC.get.navigator.dash.toLoader();
+                      },
                       child: const Text("Set alarm"),
                     ),
                   ),

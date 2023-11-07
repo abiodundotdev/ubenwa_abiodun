@@ -18,8 +18,14 @@ class DashNavigator extends BaseNavigator {
   }
 
   void toCryRecord() {
-    pushAndRemoveAllExceptThis(
+    push(
       const CryRecordPage(),
+    );
+  }
+
+  void toLoader() {
+    push(
+      const PreloaderPage(),
     );
   }
 

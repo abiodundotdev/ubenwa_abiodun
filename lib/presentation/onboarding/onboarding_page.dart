@@ -156,19 +156,24 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     itemBuilder: (c, index) {
                       return Column(
                         children: [
-                          Text(
-                            introDataList[index].title,
-                            textAlign: TextAlign.center,
-                            style: textTheme.titleLarge!.copyWith(
-                              fontWeight: FontWeight.w700,
+                          Expanded(
+                            child: Text(
+                              introDataList[index].title,
+                              textAlign: TextAlign.center,
+                              style: textTheme.titleLarge!.copyWith(
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
-                          const Gap(20.0),
-                          Text(
-                            introDataList[index].content,
-                            textAlign: TextAlign.center,
-                            style: textTheme.bodyMedium!.copyWith(
-                              fontWeight: FontWeight.w300,
+                          Expanded(
+                            child: Text(
+                              introDataList[index].content,
+                              textAlign: TextAlign.center,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.w300,
+                              ),
                             ),
                           ),
                         ],
@@ -176,6 +181,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     },
                   ),
                 ),
+                const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

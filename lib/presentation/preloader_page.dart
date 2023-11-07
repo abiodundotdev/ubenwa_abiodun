@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:ubenwa/core/core.dart';
-import 'package:ubenwa/presentation/widget/animations/water_wave.dart';
-import 'package:ubenwa/presentation/widget/widget.dart';
-
-import 'widget/animations/water_wave_config.dart';
+import 'package:ubenwa/presentation/presentation.dart';
+import 'package:ubenwa/service_container.dart';
 
 class PreloaderPage extends StatefulWidget {
   const PreloaderPage({super.key});
@@ -37,12 +35,19 @@ class _PreloaderPageState extends State<PreloaderPage>
           }
         },
       );
+    _animateToPageAfterCompletion();
   }
 
   @override
   void dispose() {
-    super.dispose();
     waterDropController.dispose();
+    super.dispose();
+  }
+
+  //TODO: This should animate after network call his completed, this should not be done live applications
+  void _animateToPageAfterCompletion() async {
+    await Future.delayed(const Duration(seconds: 6));
+    SC.get.navigator.auth.pop();
   }
 
   @override
