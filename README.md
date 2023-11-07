@@ -21,8 +21,8 @@ flutter run
 
 > If you are using mac you can use Makefile:
 ```
-make pub get
-make run
+make pub_get
+make run_mock
 ```
 
 > To run the the test run:

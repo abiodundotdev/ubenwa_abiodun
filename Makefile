@@ -7,6 +7,9 @@ fastlane_upload_ios:
 test_coverage:
 	flutter test --no-pub --coverage
 
+pub_get:
+	flutter pub get
+
 build_coverage:
 	make test_coverage && genhtml -o coverage coverage/lcov.info
 
@@ -19,9 +22,8 @@ built_value_build:
 built_value_watch:
 	flutter packages pub run build_runner watch --delete-conflicting-outputs
 
-
 run_mock:
-	flutter run --dart-define=env.mode=mock
+	flutter run --flavor mock --dart-define=env.mode=mock
 
 # iOS
 prod_build:
