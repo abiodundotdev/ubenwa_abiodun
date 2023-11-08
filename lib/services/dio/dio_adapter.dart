@@ -75,8 +75,7 @@ class TokenInterceptor extends Interceptor {
   @override
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    options.headers["Authorization"] =
-        "Bearer ${SC.get.sessionStorage.token.value}";
+    options.headers["Authorization"] = "Bearer ";
     super.onRequest(options, handler);
   }
 }

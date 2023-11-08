@@ -61,22 +61,22 @@ android {
         prod {
             dimension "environment"
             versionName flutterVersionName
-            resValue "string", "app_label", "Ubenwa"
+            resValue "string", "app_label", "UbenwaUbenwa_Abiodun"
         }
         mock {
             dimension "environment"
             versionName flutterVersionName+"-mock"
-            resValue "string", "app_label", "Ubenwa Mock"
+            resValue "string", "app_label", "Ubenwa_Abiodun Mock"
         }
         staging {
             dimension "environment"
             versionName flutterVersionName+"-staging"
-            resValue "string", "app_label", "Ubenwa Staging"
+            resValue "string", "app_label", "Ubenwa_Abiodun Staging"
         }
         dev {
             dimension "environment"
             versionName flutterVersionName+"-dev"
-            resValue "string", "app_label", "Ubenwa Dev"
+            resValue "string", "app_label", "Ubenwa_Abiodun Dev"
         }
     }
 }

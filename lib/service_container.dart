@@ -63,14 +63,7 @@ extension XSC on SC {
 }
 
 class SessionStorage {
-  final _user = ValueNotifier<dynamic>(null);
-  final _token = ValueNotifier<String?>(null);
-  ValueNotifier<String?> get token => _token;
-  ValueNotifier<dynamic> get user => _user;
-  ValueNotifier<ThemeMode> appThemeMode = ValueNotifier(ThemeMode.system);
-  void setToken(String? token) {
-    _token.value = token;
-  }
+  ValueNotifier<ThemeMode> appThemeMode = ValueNotifier(ThemeMode.light);
 }
 
 ValueNotifier<String> tokenSession = ValueNotifier("");

@@ -18,13 +18,14 @@ class AppTheme extends InheritedTheme {
     );
 
     return ThemeData(
-      useMaterial3: true,
+      useMaterial3: false,
       scaffoldBackgroundColor: Colors.white,
       primarySwatch: AppColors.primary,
       primaryColor: AppColors.primary,
       primaryIconTheme: theme.primaryIconTheme.copyWith(
         color: AppColors.primary,
       ),
+      brightness: Brightness.light,
       textTheme: theme.textTheme
           .copyWith(
             labelLarge: theme.textTheme.labelLarge!.copyWith(
@@ -49,7 +50,7 @@ class AppTheme extends InheritedTheme {
       ),
       bottomAppBarTheme: const BottomAppBarTheme(color: AppColors.white),
       canvasColor: Colors.white,
-      colorScheme: ColorScheme.light(primary: AppColors.primary),
+      // colorScheme: ColorScheme.light(primary: AppColors.primary),
       shadowColor: Colors.grey.shade400,
       buttonTheme: theme.buttonTheme.copyWith(
         height: 50.0,
@@ -110,7 +111,7 @@ class AppTheme extends InheritedTheme {
       scaffoldBackgroundColor: AppColors.dark,
       primarySwatch: AppColors.primary,
       primaryColor: AppColors.primary,
-      //brightness: Brightness.dark,
+      brightness: Brightness.dark,
       primaryIconTheme: theme.primaryIconTheme.copyWith(
         color: AppColors.primary,
       ),
@@ -138,10 +139,10 @@ class AppTheme extends InheritedTheme {
         tileColor: const Color(0XFFBCBBC1).withOpacity(.20),
       ),
       canvasColor: AppColors.dark,
-      colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: AppColors.primary,
-        accentColor: AppColors.accent,
-      ),
+      // colorScheme: ColorScheme.fromSwatch(
+      //   primarySwatch: AppColors.primary,
+      //   accentColor: AppColors.accent,
+      // ),
       shadowColor: Colors.grey.shade400,
       buttonTheme: theme.buttonTheme.copyWith(
         height: 50.0,

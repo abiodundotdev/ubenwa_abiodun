@@ -6,8 +6,8 @@
             "request": "launch",
             "type": "dart",
             "args":  [
-                  "--flavor",
-                 "mock",
+                //  "--flavor",
+                 //"mock",
                 "--dart-define=env.mode=mock"
              ]
         },

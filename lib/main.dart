@@ -24,20 +24,28 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final environment = Environment.fromConfig;
-    final app = AppTheme(
-      child: ScreenUtilInit(
-          designSize: const Size(360, 690),
-          minTextAdapt: true,
-          builder: (context, child) {
-            return MaterialApp(
-              navigatorKey: rootNavigatorKey,
-              debugShowCheckedModeBanner: false,
-              theme: AppTheme.of(context).light(Theme.of(context)),
-              darkTheme: AppTheme.of(context).dark(Theme.of(context)),
-              themeMode: ThemeMode.light,
-              home: const SplashScreen(),
-            );
-          }),
+    final sc = SC.get;
+    final themeMode = sc.sessionStorage.appThemeMode;
+    final app = ValueListenableBuilder(
+      valueListenable: themeMode,
+      builder: (context, ThemeMode themeMode, _) {
+        return AppTheme(
+          child: ScreenUtilInit(
+              designSize: const Size(360, 690),
+              minTextAdapt: true,
+              builder: (context, child) {
+                return MaterialApp(
+                  navigatorKey: rootNavigatorKey,
+                  debugShowCheckedModeBanner: false,
+                  theme: AppTheme.of(context).light(Theme.of(context)),
+                  darkTheme: AppTheme.of(context).dark(Theme.of(context)),
+                  themeMode: themeMode,
+                  useInheritedMediaQuery: false,
+                  home: const SplashScreen(),
+                );
+              }),
+        );
+      },
     );
     if (environment.isProd) {
       return app;

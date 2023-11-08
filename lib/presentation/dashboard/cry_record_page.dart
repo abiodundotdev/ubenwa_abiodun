@@ -22,6 +22,7 @@ num chartValue = 1;
 class _CryRecordPageState extends State<CryRecordPage> {
   @override
   Widget build(BuildContext context) {
+    final themeMode = SC.get.sessionStorage.appThemeMode;
     return AppScaffold(
         padding: EdgeInsets.zero,
         appBar: CustomAppBar(
@@ -29,20 +30,17 @@ class _CryRecordPageState extends State<CryRecordPage> {
           trailing: Padding(
             padding: const EdgeInsets.all(10.0),
             child: SizedBox(
-              child: Stack(
-                children: [
-                  Icon(
-                    AppIcons.notification,
-                    color: Colors.black,
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.accent,
-                      radius: 6.0,
-                    ),
-                  )
-                ],
+              child: ValueListenableBuilder(
+                valueListenable: themeMode,
+                builder: (context, ThemeMode value, __) {
+                  return Switch.adaptive(
+                    value: value.isDark,
+                    onChanged: (isLightMode) {
+                      themeMode.value =
+                          isLightMode ? ThemeMode.dark : ThemeMode.light;
+                    },
+                  );
+                },
               ),
             ),
           ),
@@ -57,7 +55,7 @@ class _CryRecordPageState extends State<CryRecordPage> {
                 child: _HorizontalCalender(
                   key: AppWidgetKeys.horizontalCalender,
                   onDateChange: (DateTime date) {
-                    //TODO: This is used to animate the bar chart to show the animation effect
+                    //TODO: Remove This is used to animate the bar chart to show the animation effect
                     setState(() {
                       chartValue = Random().nextInt(8 - 1 + 1) + 1;
                     });
@@ -153,7 +151,6 @@ class _HorizontalCalenderState extends State<_HorizontalCalender> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-
     return Column(
       children: [
         SingleChildScrollView(
@@ -164,6 +161,7 @@ class _HorizontalCalenderState extends State<_HorizontalCalender> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: List.generate(months.length, (_index) {
                 final index = _index + 1;
+                final isActive = _selectedMonth == index;
                 return InkResponse(
                   onTap: () {
                     selectedMonth = index;
@@ -175,19 +173,22 @@ class _HorizontalCalenderState extends State<_HorizontalCalender> {
                     );
                     widget.onDateChange(
                       DateTime(
-                          DateTime.now().year, _selectedMonth, _selectedDay),
+                        DateTime.now().year,
+                        _selectedMonth,
+                        _selectedDay,
+                      ),
                     );
                   },
                   child: Text(
                     months[_index].substring(0, 3),
                     style: TextStyle(
                       fontSize: 16.0.sp,
-                      fontWeight: _selectedMonth == index
-                          ? FontWeight.w700
-                          : FontWeight.w400,
-                      color: _selectedMonth == index
+                      fontWeight: isActive ? FontWeight.w700 : FontWeight.w400,
+                      color: isActive
                           ? AppColors.primary.shade300
-                          : Colors.black54,
+                          : (context.isLightMode
+                              ? Colors.black54
+                              : Colors.white),
                     ),
                   ),
                 );
@@ -394,9 +395,11 @@ class _OverviewCard extends StatelessWidget {
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
-                  side: const BorderSide(
+                  side: BorderSide(
                     width: .5,
-                    color: Color(0XFF132C84),
+                    color: context.isLightMode
+                        ? const Color(0XFF132C84)
+                        : Colors.white,
                   ),
                 ),
               ),
@@ -557,6 +560,7 @@ class _ChallengeCard extends StatelessWidget {
                                 title: "8",
                                 content: "out of 12\n hours of silence",
                                 percentage: .8 * value,
+                                context: context,
                               ),
                             );
                           },
@@ -620,8 +624,12 @@ class _ChallengeCard extends StatelessWidget {
 
 class CirclularBarPainter extends CustomPainter {
   final double percentage;
+  final BuildContext context;
   CirclularBarPainter(
-      {required this.content, required this.title, required this.percentage});
+      {required this.content,
+      required this.title,
+      required this.percentage,
+      required this.context});
   final String title;
   final String content;
 
@@ -630,7 +638,7 @@ class CirclularBarPainter extends CustomPainter {
     final width = size.width;
     final height = size.height;
     final center = Offset(width / 2, height / 2);
-    final thickness = 20.0.w;
+    final thickness = 18.0.w;
     final rect = Rect.fromCenter(center: center, width: width, height: height);
 
     final paint = Paint()
@@ -676,14 +684,14 @@ class CirclularBarPainter extends CustomPainter {
     Canvas canvas,
     Size size,
   ) {
-    const titleTextStyle = TextStyle(
-      color: Colors.black,
+    final textTheme = Theme.of(context).textTheme;
+
+    final titleTextStyle = textTheme.titleLarge!.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.w600,
     );
 
     const contentTextStyle = TextStyle(
-      color: Colors.black,
       fontSize: 10,
       fontWeight: FontWeight.w400,
     );

@@ -15,11 +15,12 @@ A few resources to get you started if this is your first Flutter project:
 
 > To run the code run command below:
 ```
+git clone https://github.com/abiodundotdev/ubenwa_abiodun.git
 flutter pub get
 flutter run --flavor mock --dart-define=env.mode=mock
 ```
 
-> If you are using mac you can use Makefile:
+> If you are using mac, you can use Makefile commands after successfully cloning the repository:
 ```
 make pub_get
 make run_mock
@@ -42,8 +43,6 @@ make test_coverage
  - Click on run workflow
  - Provide a random description
  - A mail will be sent to you with all the links to run the app
- - Cheers
-
 
 
 > IMAGES

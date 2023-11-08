@@ -362,7 +362,7 @@
 				DEVELOPMENT_TEAM = 9YP7RU3UA9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Ubenwa;
+				INFOPLIST_KEY_CFBundleDisplayName = Ubenwa_Abiodun;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -496,7 +496,7 @@
 				DEVELOPMENT_TEAM = 9YP7RU3UA9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Ubenwa;
+				INFOPLIST_KEY_CFBundleDisplayName = Ubenwa_Abiodun;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -524,7 +524,7 @@
 				DEVELOPMENT_TEAM = 9YP7RU3UA9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Ubenwa;
+				INFOPLIST_KEY_CFBundleDisplayName = Ubenwa_Abiodun;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
