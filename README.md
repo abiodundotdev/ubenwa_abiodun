@@ -6,7 +6,7 @@ A Flutter project for Ubenwa Coding Challenge
 
 This repository is for Ubenwa Coding Challenge
 
-### The codes follow the SOLID design principles
+### The codes follow the SOLID Design Principles and Clean Architecture
 
 A few resources to get you started if this is your first Flutter project:
 
