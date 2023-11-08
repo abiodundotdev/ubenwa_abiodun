@@ -5,12 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:ubenwa/core/core.dart';
-//import 'dart:math' as math;
 import 'package:ubenwa/presentation/widget/app_scaffold.dart';
 import 'package:ubenwa/service_container.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  //This is included for testing  purpose, it should not be included in production
+  final bool isTest;
+  const SplashScreen({super.key, this.isTest = false});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -22,10 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _animateToPageAfterCompletion();
+    if (!widget.isTest) {
+      _animateToPageAfterCompletion();
+    }
   }
 
-  //TODO: This should animate after network call his completed, this should not be done live applications
+  //TODO: This should animate after network call his completed, this should not be done in production
   void _animateToPageAfterCompletion() async {
     await Future.delayed(const Duration(seconds: 6));
     SC.get.navigator.auth.toOnboarding();

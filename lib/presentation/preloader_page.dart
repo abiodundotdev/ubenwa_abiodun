@@ -6,7 +6,8 @@ import 'package:ubenwa/presentation/presentation.dart';
 import 'package:ubenwa/service_container.dart';
 
 class PreloaderPage extends StatefulWidget {
-  const PreloaderPage({super.key});
+  final bool isTest;
+  const PreloaderPage({super.key, this.isTest = false});
 
   @override
   State<PreloaderPage> createState() => _PreloaderPageState();
@@ -30,12 +31,15 @@ class _PreloaderPageState extends State<PreloaderPage>
     waterDroplet = Tween<num>(begin: -1, end: 1).animate(waterDropController)
       ..addListener(
         () {
+          //TODO: Find a way around this to make sure it listen to completion and not value
           if (waterDroplet.value == 0.9) {
             dropCount++;
           }
         },
       );
-    _animateToPageAfterCompletion();
+    if (!widget.isTest) {
+      _animateToPageAfterCompletion();
+    }
   }
 
   @override
@@ -46,7 +50,7 @@ class _PreloaderPageState extends State<PreloaderPage>
 
   //TODO: This should animate after network call his completed, this should not be done live applications
   void _animateToPageAfterCompletion() async {
-    await Future.delayed(const Duration(seconds: 8));
+    await Future.delayed(const Duration(seconds: 10));
     SC.get.navigator.auth.pop();
   }
 
@@ -79,8 +83,11 @@ class _PreloaderPageState extends State<PreloaderPage>
         child: Stack(
           children: [
             Align(
+              key: AppWidgetKeys.babyBottle,
               alignment: Alignment.topCenter,
-              child: Image(image: AppImages.babyBottle),
+              child: Image(
+                image: AppImages.babyBottle,
+              ),
             ),
             Align(
               alignment: Alignment.center,
@@ -88,7 +95,7 @@ class _PreloaderPageState extends State<PreloaderPage>
                 baseColor: AppColors.white,
                 highlightColor: AppColors.primary,
                 child: Text(
-                  "Please wait while we\ngather your Baby’s data...",
+                  AppStrings.pleaseWait,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.white,

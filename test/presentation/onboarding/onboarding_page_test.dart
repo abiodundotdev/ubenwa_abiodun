@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ubenwa/core/constants/constants.dart';
+import 'package:ubenwa/core/core.dart';
 import 'package:ubenwa/presentation/presentation.dart';
 
 import '../../helper.dart';
@@ -9,81 +9,78 @@ void main() {
   late Widget onboardingPage;
 
   setUp(() {
-    //Set up the service container
     TestHelper.setUpServiceContainer();
     onboardingPage = buildTestableMaterialApp(const OnboardingPage());
   });
 
   group("Onboarding page test", () {
     testWidgets(
-      'Verify has horizontal calender view',
+      'Verify has the required images',
       (WidgetTester widgetTester) async {
-        await widgetTester.pumpWidget(cryRecordPage);
+        await widgetTester.pumpWidget(onboardingPage);
         await widgetTester.pumpAndSettle();
-        final horizontalCalenderView =
-            find.byKey(AppWidgetKeys.horizontalCalender);
-        expect(horizontalCalenderView, findsOneWidget);
+        final images = find.byType(Image);
+        expect(
+          images,
+          findsNWidgets(5),
+        );
       },
     );
 
     testWidgets(
-      'Verify has daily overview view',
+      'Verify if the scrollable pageview wrapping the text is present',
       (WidgetTester widgetTester) async {
-        await widgetTester.pumpWidget(cryRecordPage);
+        await widgetTester.pumpWidget(onboardingPage);
         await widgetTester.pumpAndSettle();
-        final overviewView = find.byKey(AppWidgetKeys.horizontalCalender);
-        expect(overviewView, findsOneWidget);
+        final pageView = find.byType(PageView);
+        expect(pageView, findsOneWidget);
+        //Verify if pageview has the title and content text
+        expect(
+          find.descendant(of: pageView, matching: find.byType(Text)),
+          findsNWidgets(2),
+        );
       },
     );
 
     testWidgets(
-      'Verify has hourly breakdown view',
+      'Verify has the 4 scroll indicators',
       (WidgetTester widgetTester) async {
-        await widgetTester.pumpWidget(cryRecordPage);
+        await widgetTester.pumpWidget(onboardingPage);
         await widgetTester.pumpAndSettle();
-        final hourybreakdownView = find.byKey(AppWidgetKeys.hourlybreakdown);
-        expect(hourybreakdownView, findsOneWidget);
+        final scrollIndicator = find.byKey(AppWidgetKeys.scrollIndicator);
+        expect(
+          scrollIndicator,
+          findsNWidgets(4),
+        );
       },
     );
 
-    testWidgets(
-      'Verify has daily challenge view',
-      (WidgetTester widgetTester) async {
-        await widgetTester.pumpWidget(cryRecordPage);
-        await widgetTester.pumpAndSettle();
-        final dailyChallengeView = find.byKey(AppWidgetKeys.challenge);
-        expect(dailyChallengeView, findsOneWidget);
-      },
-    );
-
-    // Test for user interactions on the cry record page
+    // Test for user interactions on the onboarding page
     // NB: This can be done on a seperate file, doing it here since their is no much interaction
-
+    //NB: This can be moved to integration test to check each interaction
     testWidgets(
-      'Verify  if screen navigates to preloader screen after set alarm is tappped',
+      'Verify when user tap the next button 3 times, next and previous button is invisble and show me is shown and also naviagates to cry record page on completion',
       (WidgetTester widgetTester) async {
-        await widgetTester.pumpWidget(cryRecordPage);
+        await widgetTester.pumpWidget(onboardingPage);
         await widgetTester.pumpAndSettle();
-        final setAlarmButton = find.text("Set alarm");
-        //Finds the parent scrollable
-        final scrollableFinder = find.descendant(
-          of: find.byKey(AppWidgetKeys.parentScrollable),
-          matching: find.byType(Scrollable).at(0),
-        );
-        // Scroll until the item to be found appears.
-        // Using 500 as scroll extent most devices height are within 300 -  500
-        await widgetTester.scrollUntilVisible(
-          setAlarmButton,
-          500.0,
-          scrollable: scrollableFinder,
-        );
-        expect(setAlarmButton, findsOneWidget);
-        //Tap the button since it is found
-        await widgetTester.tap(setAlarmButton);
-        //Wait for some seconds incase of delayed response
+        final nextButton = find.text("Next");
+        final previousButton = find.text("Previous");
+        final showMeHowButton = find.text("Show me how");
+        expect(nextButton, findsOneWidget);
+        expect(previousButton, findsOneWidget);
+        expect(showMeHowButton, findsNothing);
+        for (var i = 0; i < 3; i++) {
+          await widgetTester.tap(nextButton);
+          await widgetTester.pumpAndSettle(const Duration(seconds: 1));
+        }
+        expect(nextButton, findsNothing);
+        expect(previousButton, findsNothing);
+        expect(showMeHowButton, findsOneWidget);
+        //Tap the show me button
+        await widgetTester.tap(showMeHowButton);
         await widgetTester.pumpAndSettle(const Duration(seconds: 2));
-        expect(find.byType(PreloaderPage), findsNothing);
-        //Hooray!, this is test is successfull
+        //Verify it it navigates to cry record page
+        expect(find.byType(CryRecordPage), findsOneWidget);
       },
     );
   });

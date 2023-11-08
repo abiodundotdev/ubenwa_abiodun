@@ -144,6 +144,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       return _ScollIndicator(
                         isActive: currentIndex == index,
                         color: introDataList[index].color,
+                        key: AppWidgetKeys.scrollIndicator,
                       );
                     },
                   ).spacedRow(space: 4.0.w),
@@ -245,7 +246,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
 class _ScollIndicator extends StatelessWidget {
   final bool isActive;
   final Color color;
-  const _ScollIndicator({required this.isActive, required this.color});
+  const _ScollIndicator({required this.isActive, required this.color, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
