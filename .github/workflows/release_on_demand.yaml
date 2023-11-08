@@ -6,9 +6,6 @@ on:
       description:
         description: 'Brief description'
         required: true
-      permalink:
-        description: 'Permalink'
-        required: true
 
 env:
   EMAILS_FILE: ./forward_emails.txt
@@ -67,7 +64,7 @@ jobs:
           for f in "${file_filter[@]}"; do cp -R "$f" "$output_folder/$(basename "$f")"; done
 
           echo "Writing README.md"
-          body="# $version\n${{ github.event.inputs.description }}\n\n${{ github.event.inputs.permalink }}\n"
+          body="# $version\n${{ github.event.inputs.description }}\n\\n"
           echo -e "${body//\\r}" >> "$output_folder/README.md"
           echo "Writing CHANGELOG.md"
           echo -e "${body//\\r}" >> "$clone_dir/CHANGELOG.md"
@@ -100,7 +97,7 @@ jobs:
           server_port: 465
           username: ${{secrets.EMAIL_USERNAME}}
           password: ${{secrets.EMAIL_PASSWORD}}
-          subject: Abiodun Ubenwa Mobile Pre-Release Build Successful
+          subject: Abiodun Ubenwa Mobile Challenge Build Successful
           to: ${{ steps.get_emails.outputs.emails }}
           from:   Ubenwa Abiodun <${{secrets.EMAIL_USERNAME}}>
           content_type: text/html
@@ -109,12 +106,13 @@ jobs:
             <p>Successfully generated builds for <a href="${{ steps.copy.outputs.branch_url }}">Ubenwa mobile apps</a>.</p>
             <p>Attached to this mail are links to four separate pre-release android builds for:</p>
             <ol>
-                <li><a href="${{ steps.copy.outputs.url }}/app-mock-release.apk">Mock (UI/UX)</a></li>
+                <li><a href="${{ steps.copy.outputs.url }}/app-mock-release.apk">Mock </a></li>
                 <li><a href="${{ steps.copy.outputs.url }}/app-dev-release.apk">Development</a></li>
-                <li><a href="${{ steps.copy.outputs.url }}/app-staging-release.apk">Staging (Quality assurance)</a></li>
-                <li><a href="${{ steps.copy.outputs.url }}/app-prod-release.apk">Production (Customers)</a></li>
+                <li><a href="${{ steps.copy.outputs.url }}/app-staging-release.apk">Staging</a></li>
+                <li><a href="${{ steps.copy.outputs.url }}/app-prod-release.apk">Production</a></li>
             </ol>
             <p>You can pick any of the above. The intention is to try and break either one or all of the apps.</p>
-            <p>More technical information on what changed can be found in this <a href="${{ steps.copy.outputs.readme_url }}/">READ ME</a></p>
-            <p>Note that this is an automated email from the action you run.</p>
-            <p>Thank you</p>
+            <p>Note that this is an automated email from the action you ran</p>
+            <p>Thank you for the consideration</p>
+            <br />
+            <p>Qazeem Qudus Abiodun</p>

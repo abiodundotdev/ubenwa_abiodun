@@ -73,6 +73,7 @@ void main() {
           await widgetTester.tap(nextButton);
           await widgetTester.pumpAndSettle(const Duration(seconds: 1));
         }
+        //Verify if previous button works as expected
         expect(nextButton, findsNothing);
         expect(previousButton, findsNothing);
         expect(showMeHowButton, findsOneWidget);
@@ -81,6 +82,21 @@ void main() {
         await widgetTester.pumpAndSettle(const Duration(seconds: 2));
         //Verify it it navigates to cry record page
         expect(find.byType(CryRecordPage), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Verify previous button works as expected',
+      (WidgetTester widgetTester) async {
+        final nextButton = find.text("Next");
+        final previousButton = find.text("Previous");
+        await widgetTester.pumpWidget(onboardingPage);
+        await widgetTester.pumpAndSettle();
+        await widgetTester.tap(nextButton);
+        await widgetTester.pumpAndSettle(const Duration(seconds: 1));
+        await widgetTester.tap(previousButton);
+        await widgetTester.pumpAndSettle(const Duration(seconds: 1));
+        expect(find.textContaining("Welcome"), findsOneWidget);
       },
     );
   });

@@ -16,7 +16,7 @@ A few resources to get you started if this is your first Flutter project:
 > To run the code run command below:
 ```
 flutter pub get
-flutter run
+flutter run --flavor mock --dart-define=env.mode=mock
 ```
 
 > If you are using mac you can use Makefile:
@@ -29,6 +29,23 @@ make run_mock
 ```
 flutter test
 ```
+
+> Test from Makefile
+```
+make test_coverage
+```
+
+> TO RUN FROM GITHUB ACTION
+
+ - Click on actions from the top navigation bar of the repository
+ - Click on Release on demand from the list on workflows
+ - Click on run workflow
+ - Provide a random description
+ - A mail will be sent to you with all the links to run the app
+ - Cheers
+
+
+
 > IMAGES
 <p float="left">
 <img src="https://raw.githubusercontent.com/abiodundotdev/ubenwa_abiodun/main/docimg/1.png?raw=true"  width= "300px" height ="500px" /> <img src="https://raw.githubusercontent.com/abiodundotdev/ubenwa_abiodun/main/docimg/2.png?raw=true" width= "300px" height ="500px"  /> 

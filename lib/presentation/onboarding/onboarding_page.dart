@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:ubenwa/core/core.dart';
 import 'package:ubenwa/presentation/widget/app_scaffold.dart';
-import 'dart:math';
 
 import 'package:ubenwa/service_container.dart';
 
@@ -232,14 +231,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
         ],
       ),
     );
-  }
-
-  Offset getChildPoint(
-      int index, int length, double betweenRadius, double childrenDiameter) {
-    double angel = 2 * pi * (index / length);
-    double x = cos(angel) * betweenRadius - childrenDiameter / 2;
-    double y = sin(angel) * betweenRadius - childrenDiameter / 2;
-    return Offset(x, y);
   }
 }
 
