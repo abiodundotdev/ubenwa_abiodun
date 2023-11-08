@@ -20,13 +20,13 @@ built_value_watch:
 	flutter packages pub run build_runner watch --delete-conflicting-outputs
 
 run_mock:
-	flutter run --flavor mock --dart-define=env.mode=mock
+	flutter run --flavor mock --dart-define=env.mode=mock --no-tree-shake-icons
 
 run_prod:
-	flutter run --flavor prod --dart-define=env.mode=prod
+	flutter run --flavor prod --dart-define=env.mode=prod --no-tree-shake-icons
 
 run_staging:
-	flutter run --flavor staging --dart-define=env.mode=staging
+	flutter run --flavor staging --dart-define=env.mode=staging --no-tree-shake-icons
 
 run_dev:
-	flutter run --flavor dev --dart-define=env.mode=dev
+	flutter run --flavor dev --dart-define=env.mode=dev --no-tree-shake-icons
