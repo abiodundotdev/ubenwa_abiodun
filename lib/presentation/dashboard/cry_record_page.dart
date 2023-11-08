@@ -48,14 +48,16 @@ class _CryRecordPageState extends State<CryRecordPage> {
           ),
         ),
         body: SingleChildScrollView(
+          key: AppWidgetKeys.parentScrollable,
           child: Column(
             children: [
               Gap(10.0.h),
               Padding(
                 padding: AppConstants.contentPadding,
                 child: _HorizontalCalender(
+                  key: AppWidgetKeys.horizontalCalender,
                   onDateChange: (DateTime date) {
-                    //TODO: This is used to animate the bar chart to show the animation efffect based on data passed
+                    //TODO: This is used to animate the bar chart to show the animation effect
                     setState(() {
                       chartValue = Random().nextInt(8 - 1 + 1) + 1;
                     });
@@ -65,15 +67,21 @@ class _CryRecordPageState extends State<CryRecordPage> {
               Gap(23.0.h),
               Padding(
                 padding: AppConstants.contentPadding.w,
-                child: _OverviewCard(),
+                child: _OverviewCard(
+                  key: AppWidgetKeys.overview,
+                ),
               ),
               Gap(23.0.h),
-              _HourlyBreakDownCard(percentage: chartValue),
+              _HourlyBreakDownCard(
+                percentage: chartValue,
+                key: AppWidgetKeys.hourlybreakdown,
+              ),
               Gap(23.0.h),
               Padding(
                 padding: AppConstants.contentPadding.w,
                 child: _ChallengeCard(
                   pieChartpercentage: chartValue / 8,
+                  key: AppWidgetKeys.challenge,
                 ),
               ),
               //Extra bottom pading for widget to be more visible
@@ -87,7 +95,7 @@ class _CryRecordPageState extends State<CryRecordPage> {
 class _HorizontalCalender extends StatefulWidget {
   final Function(DateTime) onDateChange;
 
-  const _HorizontalCalender({required this.onDateChange});
+  const _HorizontalCalender({required this.onDateChange, super.key});
 
   @override
   State<_HorizontalCalender> createState() => _HorizontalCalenderState();
@@ -297,7 +305,10 @@ class _HorizontalCalenderState extends State<_HorizontalCalender> {
 
 class _HourlyBreakDownCard extends StatelessWidget {
   final num percentage;
-  const _HourlyBreakDownCard({required this.percentage});
+  const _HourlyBreakDownCard({
+    required this.percentage,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -333,7 +344,7 @@ class _HourlyBreakDownCard extends StatelessWidget {
 }
 
 class _OverviewCard extends StatelessWidget {
-  _OverviewCard();
+  _OverviewCard({required super.key});
 
   final gridDataList = [
     _GridData(
@@ -475,7 +486,8 @@ class _GridData {
 class _ChallengeCard extends StatelessWidget {
   ///This is added as a fake data to auto animate the pieChart. Its just a fake data
   final double pieChartpercentage;
-  const _ChallengeCard({required this.pieChartpercentage});
+  const _ChallengeCard({required this.pieChartpercentage, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -713,6 +725,7 @@ class CirclularBarPainter extends CustomPainter {
   bool shouldRebuildSemantics(CirclularBarPainter oldDelegate) => false;
 }
 
+//TODO : Experiment with custom paint for the bar instead of animated container.
 class HorizontalBar extends StatefulWidget {
   final double percentage;
   final String label;

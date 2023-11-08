@@ -11,7 +11,7 @@ void main() {
 
     test("Verify conversion to  degree is correct", () {
       final angle = Angle(1.57).toDegrees;
-      expect(angle, isA<num>());
+      expect(angle, isA<double>());
       expect(angle.round(), equals(90));
     });
   });
