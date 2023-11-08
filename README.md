@@ -6,7 +6,7 @@ A Flutter project for Ubenwa Coding Challenge
 
 This repository is for Ubenwa Coding Challenge
 
-### The codes follow the SOLID Design Principles and Clean Architecture
+### These project follow the SOLID Design Principles and Clean Architecture
 
 A few resources to get you started if this is your first Flutter project:
 
@@ -25,12 +25,12 @@ make pub_get
 make run_mock
 ```
 
-> To run the the test run:
+> To run test:
 ```
 flutter test
 ```
 
-> Test from Makefile
+> Run test from Makefile
 ```
 make test_coverage
 ```
@@ -38,7 +38,7 @@ make test_coverage
 > TO RUN FROM GITHUB ACTION
 
  - Click on actions from the top navigation bar of the repository
- - Click on Release on demand from the list on workflows
+ - Click on Release on demand from the list of workflows
  - Click on run workflow
  - Provide a random description
  - A mail will be sent to you with all the links to run the app
